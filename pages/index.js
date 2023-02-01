@@ -13,9 +13,16 @@ export default function Home() {
 
   const fetchWeather = (e) => {
     e.preventDefault();
-    axios.get(url).then((res) => {
-      setWeather([...weather, res.data]);
-    });
+    axios
+      .get(url)
+      .then((res) => {
+        setWeather([...weather, res.data]);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Enter a valid city!");
+        return;
+      });
 
     setCity(" ");
   };
@@ -42,7 +49,11 @@ export default function Home() {
         </div>
 
         <section className="absolute top-10 left-0 right-0 w-full">
-          <div className=" mx-auto max-w-md py-12">
+          <div
+            className=" mx-auto py-12
+          max-w-md
+          lg:max-w-2xl"
+          >
             <form className=" flex flex-col space-y-3" onSubmit={fetchWeather}>
               <input
                 type="text"
@@ -59,13 +70,16 @@ export default function Home() {
             </form>
           </div>
 
-          <div className=" max-w-md mx-auto space-y-3">
-            {weather.map((item) => (
+          <div className=" max-w-md lg:max-w-2xl mx-auto space-x-3 overflow-auto scrollbar-hide flex py-6 ">
+            {weather?.map((item) => (
               <WeatherCard
+                key={item.name}
                 name={item.name}
                 temp={item.main.temp}
                 weather={item.weather[0].main}
                 feelsTemp={item.main.feels_like}
+                tempMax={item.main.temp_max}
+                tempMin={item.main.temp_min}
               />
             ))}
           </div>

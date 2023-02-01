@@ -1,14 +1,21 @@
 const WeatherCard = (props) => {
   return (
-    <div className="flex justify-between center bg-white rounded-xl p-6">
-      <div className=" flex flex-col">
-        <span>{props.temp}°C</span>
-        <span className=" mt-6">{props.weather}</span>
+    <div className=" bg-blue-400 rounded-xl p-6 text-white font-light">
+      <div className=" flex flex-col justify-center items-center space-y-4 w-[320px] h-[500px] ">
+        <span className="text-2xl">{props.name}</span>
+        <span className=" text-[70px]">{props.temp}°</span>
+        <span className=" text-xl">{props.weather}</span>
+        <span className=" text-xl">Feels like {props.feelsTemp}°C</span>
+
+        <div className=" flex justify-center text-xl space-x-4">
+          <span>H:{props.tempMax}°</span>
+          <span>L:{props.tempMin}°</span>
+        </div>
       </div>
-      <div className=" flex flex-col">
-        <span>Feels like {props.feelsTemp}°C</span>
-        <span className="mt-6">{props.name}</span>
-      </div>
+
+      <button className="text-center w-full text-lg bg-white text-black py-3 rounded-lg font-medium ease-in-out duration-100 active:scale-105">
+        See more
+      </button>
     </div>
   );
 };
